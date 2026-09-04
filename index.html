@@ -4,23 +4,31 @@
   <title>Redirecting...</title>
   <script>
     const urls = [
-      "https://flic.kr/p/2rZzQk9",
-      "https://flic.kr/p/2rZzNM4",
-      "https://flic.kr/p/2rZAxXJ",
-      "https://flic.kr/p/2rZAy2b",
-      "https://flic.kr/p/2rZyxpQ",
-      "https://flic.kr/p/2rZAxXy",
-      "https://flic.kr/p/2rZAxXy",
-      "https://flic.kr/p/2rZzvVn",
-      "https://flic.kr/p/2rZAy4W",
-      "https://flic.kr/p/2rZu1rS",
-      "https://flic.kr/p/2rZu1m1",
-      "https://youtu.be/ZSkL2IBkepo?is=TJiLoPhxGj-SwXlC",
-      "https://youtu.be/TRLSb8LdnBw?si=zPwL9meDdakgksuH"
+      { url: "https://flic.kr/p/2rZzQk9", weight: 1 },
+      { url: "https://flic.kr/p/2rZzNM4", weight: 1 },
+      { url: "https://flic.kr/p/2rZAxXJ", weight: 1 },
+      { url: "https://flic.kr/p/2rZAy2b", weight: 1 },
+      { url: "https://flic.kr/p/2rZyxpQ", weight: 1 },
+      { url: "https://flic.kr/p/2rZAxXy", weight: 1 },
+      { url: "https://flic.kr/p/2rZzvVn", weight: 1 },
+      { url: "https://flic.kr/p/2rZAy4W", weight: 1 },
+      { url: "https://flic.kr/p/2rZu1rS", weight: 1 },
+      { url: "https://flic.kr/p/2rZu1m1", weight: 1 },
+      { url: "https://youtu.be/ZSkL2IBkepo?is=TJiLoPhxGj-SwXlC", weight: 3 },
+      { url: "https://youtu.be/TRLSb8LdnBw?si=zPwL9meDdakgksuH", weight: 3 }
     ];
 
-    const randomUrl = urls[Math.floor(Math.random() * urls.length)];
-    window.location.href = randomUrl;
+    const totalWeight = urls.reduce((sum, item) => sum + item.weight, 0);
+    let random = Math.random() * totalWeight;
+
+    for (const item of urls) {
+      random -= item.weight;
+
+      if (random < 0) {
+        window.location.href = item.url;
+        break;
+      }
+    }
   </script>
 </head>
 <body>
